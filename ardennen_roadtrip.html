@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Ardennen Roadtrip 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#08090d;--surface:#12141a;--surface2:#1a1d26;--border:#252830;
+  --text:#eaf0f6;--muted:#7a8494;--day1:#ff5c5c;--day2:#00c9a7;--day3:#5b8af5;--day4:#ffb347;
+  --green:#22c55e;--green-dark:#16a34a;
+  --radius:14px;--radius-sm:10px;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+.hero{position:relative;height:100svh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 20px 100px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;
+  background:url('https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/576f56d6-0329-4bd7-834f-52275f37003a.jpeg?im_w=1200') center/cover no-repeat}
+.hero-bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,var(--bg) 0%,rgba(8,9,13,0.6) 40%,rgba(8,9,13,0.2) 100%)}
+.hero-content{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.12);border-radius:100px;
+  padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);
+  margin-bottom:16px;letter-spacing:0.5px}
+.hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:42px;
+  line-height:1.05;letter-spacing:-1px;margin-bottom:8px}
+.hero .sub{font-size:15px;color:var(--muted);font-weight:500;margin-bottom:6px}
+.hero .dates{font-size:13px;color:var(--day4);font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.scroll-cta{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:4px;z-index:1;
+  color:var(--muted);font-size:11px;font-weight:600;letter-spacing:1px;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:.5;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(-6px)}}
+.scroll-cta svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2}
+
+.bnb{padding:0 16px 24px}
+.bnb-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.bnb-photos{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:180px;overflow:hidden}
+.bnb-photos img{width:100%;height:100%;object-fit:cover}
+.bnb-photos img:first-child{grid-row:1/3;height:180px}
+.bnb-photos img:nth-child(2){height:89px}
+.bnb-photos img:nth-child(3){height:89px}
+.bnb-info{padding:14px 16px}
+.bnb-title{font-weight:700;font-size:16px;margin-bottom:4px}
+.bnb-meta{font-size:12px;color:var(--muted);margin-bottom:4px;line-height:1.5}
+.bnb-rating{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;margin-bottom:12px}
+.bnb-rating svg{width:14px;height:14px;fill:var(--day4)}
+.bnb-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tag{font-size:11px;font-weight:600;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:5px 10px}
+.bnb-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  padding:12px;background:linear-gradient(135deg,#ff385c,#e31c5f);color:#fff;
+  border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;
+  cursor:pointer;text-decoration:none;transition:transform .15s}
+.bnb-btn:active{transform:scale(0.97)}
+.bnb-rules{display:flex;gap:16px;padding:12px 16px 0;font-size:11px;color:var(--muted)}
+.bnb-rules div{display:flex;flex-direction:column;gap:2px}
+.bnb-rules strong{color:var(--text);font-weight:600}
+
+.tabs{position:sticky;top:0;z-index:100;background:rgba(8,9,13,0.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:72px;padding:14px 4px 10px;text-align:center;border:none;
+  background:none;color:var(--muted);font-family:inherit;font-weight:700;
+  font-size:10px;letter-spacing:0.8px;text-transform:uppercase;cursor:pointer;
+  transition:color .2s;position:relative;white-space:nowrap}
+.tab .ti{font-size:18px;display:block;margin-bottom:3px}
+.tab::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:2.5px;border-radius:2px 2px 0 0;transition:width .25s}
+.tab.on{color:var(--text)}
+.tab.on::after{width:50%}
+.tab[data-d="1"].on::after{background:var(--day1)}
+.tab[data-d="2"].on::after{background:var(--day2)}
+.tab[data-d="3"].on::after{background:var(--day3)}
+.tab[data-d="4"].on::after{background:var(--day4)}
+.tab[data-d="p"].on::after{background:var(--green)}
+
+.day{padding:20px 16px 40px;max-width:600px;margin:0 auto}
+.dh{margin-bottom:20px}
+.dl{display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;padding:4px 10px;border-radius:6px;margin-bottom:8px}
+.day[data-d="1"] .dl{background:rgba(255,92,92,.15);color:var(--day1)}
+.day[data-d="2"] .dl{background:rgba(0,201,167,.15);color:var(--day2)}
+.day[data-d="3"] .dl{background:rgba(91,138,245,.15);color:var(--day3)}
+.day[data-d="4"] .dl{background:rgba(255,179,71,.15);color:var(--day4)}
+.dh h2{font-family:'Fraunces',serif;font-weight:900;font-size:26px;line-height:1.15;margin-bottom:4px}
+.dh .dd{font-size:13px;color:var(--muted);font-weight:500}
+
+.mw{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
+  margin-bottom:20px;height:200px;position:relative}
+.mw iframe{width:100%;height:100%;border:none;filter:invert(.9) hue-rotate(180deg) saturate(.5) brightness(.75)}
+
+.c{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:14px}
+.ci{width:100%;height:170px;object-fit:cover;display:block}
+.cb{padding:14px 16px}
+.ct{font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:4px}
+.day[data-d="1"] .ct{color:var(--day1)}
+.day[data-d="2"] .ct{color:var(--day2)}
+.day[data-d="3"] .ct{color:var(--day3)}
+.day[data-d="4"] .ct{color:var(--day4)}
+.ch{font-weight:700;font-size:16px;margin-bottom:6px;line-height:1.3}
+.cd{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+
+.nb{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
+  background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);
+  font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;
+  text-decoration:none;transition:all .15s}
+.nb:active{background:var(--green-dark);transform:scale(0.96)}
+.nb svg{width:16px;height:16px;fill:currentColor}
+
+.tip{background:rgba(255,179,71,.06);border:1px solid rgba(255,179,71,.18);
+  border-radius:var(--radius-sm);padding:12px 14px;margin-top:8px;
+  font-size:12px;line-height:1.5;color:var(--day4)}
+.tip b{font-weight:700}
+
+.ps{padding:20px 16px 120px;max-width:600px;margin:0 auto}
+.pg{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.pi{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);
+  font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;user-select:none}
+.pi:active{transform:scale(0.98)}
+.pi.ok{opacity:.4;text-decoration:line-through}
+.pb{width:22px;height:22px;border-radius:7px;border:2px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-size:12px;color:#fff}
+.pi.ok .pb{background:var(--green);border-color:var(--green)}
+.pi.ok .pb::after{content:'✓'}
+
+@media(min-width:640px){
+  .hero h1{font-size:56px}
+  .day,.ps{padding-left:24px;padding-right:24px}
+  .mw{height:280px}
+  .ci{height:220px}
+  .pg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .bnb-photos{height:240px}
+  .bnb-photos img:first-child{height:240px}
+  .bnb-photos img:nth-child(2){height:119px}
+  .bnb-photos img:nth-child(3){height:119px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🏔️ 4 JONGENS · WALLONIË</div>
+    <h1>De Ardennen</h1>
+    <div class="sub">Dinant · Ciney · Lesse-vallei</div>
+    <div class="dates">14 – 17 mei 2026</div>
+  </div>
+  <div class="scroll-cta">SCROLL<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+</section>
+
+<section class="bnb">
+  <div class="bnb-card">
+    <div class="bnb-photos">
+      <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/576f56d6-0329-4bd7-834f-52275f37003a.jpeg?im_w=720" alt="Vakantiehuis">
+      <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/d25cf194-a308-47e6-85e9-6fb511a23761.jpeg?im_w=720" alt="Slaapkamer">
+      <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/197a992c-a44d-4599-a185-5d9edb9c064a.jpeg?im_w=720" alt="Buiten">
+    </div>
+    <div class="bnb-info">
+      <div class="bnb-title">Vakantiehuis in Ciney</div>
+      <div class="bnb-meta">Gastenverblijf · 4 gasten · 2 slaapkamers · 2 bedden · 1 badkamer<br>Host: Frederic · ⚡ Reageert binnen een uur</div>
+      <div class="bnb-rating"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4,5 <span style="color:var(--muted);font-weight:400">· 4 recensies</span></div>
+      <div class="bnb-tags">
+        <span class="tag">🏊 Verwarmd zwembad</span>
+        <span class="tag">♨️ Bubbelbad</span>
+        <span class="tag">📶 Wifi</span>
+        <span class="tag">🍳 Keuken</span>
+        <span class="tag">🅿️ Gratis parkeren</span>
+      </div>
+      <a class="bnb-btn" href="https://www.airbnb.nl/rooms/1362410638257403258" target="_blank" rel="noopener">Open op Airbnb →</a>
+      <div class="bnb-rules">
+        <div><strong>Check-in</strong>Vanaf 16:00</div>
+        <div><strong>Check-out</strong>Vóór 10:00</div>
+        <div><strong>Max</strong>4 gasten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="tabs" id="tabs">
+  <button class="tab on" data-d="1" onclick="go(1)"><span class="ti">🚗</span>Dag 1</button>
+  <button class="tab" data-d="2" onclick="go(2)"><span class="ti">🛶</span>Dag 2</button>
+  <button class="tab" data-d="3" onclick="go(3)"><span class="ti">🏰</span>Dag 3</button>
+  <button class="tab" data-d="4" onclick="go(4)"><span class="ti">🍟</span>Dag 4</button>
+  <button class="tab" data-d="p" onclick="go('p')"><span class="ti">🎒</span>Paklijst</button>
+</nav>
+
+<!-- DAG 1 -->
+<section class="day" data-d="1" id="d1">
+  <div class="dh"><div class="dl">DAG 1</div><h2>Roadtrip, Cultuur &amp; Aankomst</h2><div class="dd">Donderdag 14 mei</div></div>
+  <div class="mw"><iframe loading="lazy" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Helmond,Netherlands&destination=Ciney,Belgium&waypoints=Dinant,Belgium&mode=driving&zoom=8" allowfullscreen></iframe></div>
+
+  <div class="c"><div class="cb"><div class="ct">10:00</div><div class="ch">🚗 Vertrek vanuit Helmond</div><div class="cd">Stap in de auto, zet een goeie playlist op. Het is zo'n 2 tot 2,5 uur rijden via Eindhoven → Luik → Namen → Dinant.</div><a class="nb" onclick="nav(51.4781,5.6614,'Helmond','Dinant,Belgium')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer naar Dinant</a></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Dinant_-_panoramio_%284%29.jpg/1280px-Dinant_-_panoramio_%284%29.jpg" alt="Dinant" onerror="this.remove()"><div class="cb"><div class="ct">12:15</div><div class="ch">🍺 Aankomst Dinant — Lunch &amp; Eerste Pintje</div><div class="cd">Parkeer de auto in Dinant. Zoek een leuk terrasje aan de oevers van de Maas, scoor een goede lunch en bestel het eerste pintje.</div><a class="nb" onclick="nav(50.2612,4.9122,'Dinant+centrum')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Leffe_beers.JPG/1280px-Leffe_beers.JPG" alt="Leffe" onerror="this.remove()"><div class="cb"><div class="ct">14:00</div><div class="ch">🍻 Maison Leffe — Bierproeverij</div><div class="cd">Tijd voor jullie gereserveerde tour! Ontdek de geschiedenis van dit bier en eindig in de oude kapel met een dik verdiende Leffe-proeverij.</div><a class="nb" onclick="nav(50.2604,4.9126,'Maison+Leffe+Dinant')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">15:30</div><div class="ch">🛒 Boodschappen</div><div class="cd">Rij langs Delhaize of Carrefour in Ciney. Sla flink in: ontbijtspullen, BBQ-vlees, snacks en Belgisch speciaalbier!</div><a class="nb" onclick="nav(50.2947,5.0961,'Delhaize+Ciney')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><img class="ci" src="https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/24774aa3-592e-4124-8892-9bd59e358098.jpeg?im_w=720" alt="Huisje" onerror="this.remove()"><div class="cb"><div class="ct">16:00</div><div class="ch">🏡 Inchecken in het huisje</div><div class="cd">Claim je bed, gooi het bier in de koelkast en zet de hottub aan. Check-in is vanaf 16:00.</div><a class="nb" style="background:linear-gradient(135deg,#ff385c,#e31c5f)" href="https://www.airbnb.nl/rooms/1362410638257403258" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Open Airbnb</a></div></div>
+
+  <div class="c"><img class="ci" src="https://a0.muscache.com/im/pictures/miso/Hosting-1362410638257403258/original/bc8c2bc5-87bd-4b48-814c-72cae3e653e4.jpeg?im_w=720" alt="Hottub" onerror="this.remove()"><div class="cb"><div class="ct">AVOND</div><div class="ch">🔥 BBQ &amp; Hottub</div><div class="cd">Zwembroek aan, hottub in. Steek de BBQ aan bij het huisje en geniet van de eerste avond.</div></div></div>
+</section>
+
+<!-- DAG 2 -->
+<section class="day" data-d="2" id="d2">
+  <div class="dh"><div class="dl">DAG 2</div><h2>Actie op het Water</h2><div class="dd">Vrijdag 15 mei</div></div>
+  <div class="mw"><iframe loading="lazy" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ciney,Belgium&destination=Anseremme,Belgium&mode=driving&zoom=11" allowfullscreen></iframe></div>
+
+  <div class="c"><div class="cb"><div class="ct">10:00</div><div class="ch">🍳 Uitslapen &amp; Ontbijt</div><div class="cd">Bak een eitje en leg een goede bodem voor de actiedag.</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">11:30</div><div class="ch">🚗 Naar Dinant Evasion — Anseremme</div><div class="cd">Rij naar Anseremme (±20 min vanuit Ciney). Parkeer en meld je aan voor de kajak. Vaak pak je de trein of pendelbus naar startpunt Gendron.</div><a class="nb" onclick="nav(50.2328,4.9478,'Dinant+Evasion+Anseremme')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kayak_on_the_Lesse_near_Houyet.JPG/1280px-Kayak_on_the_Lesse_near_Houyet.JPG" alt="Kajakken" onerror="this.remove()"><div class="cb"><div class="ct">12:30</div><div class="ch">🛶 Kajakken op de Lesse — 12 km</div><div class="cd">Start van de 12km tocht! Onderweg kun je prima aanmeren om even te chillen op de oevers.</div><div class="tip"><b>💡 PRO-TIP:</b> Huur of neem een waterdichte ton mee. Gooi hier jullie broodjes en blikjes bier in!</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">15:30</div><div class="ch">🏁 Einde Kajaktocht</div><div class="cd">Aankomst bij de auto in Anseremme. Even opdrogen en terug naar Ciney.</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">16:30</div><div class="ch">🏊 Zwembad &amp; Hottub Sessie</div><div class="cd">De spieren hebben gewerkt! Tijd om weer in het water te plonzen in jullie eigen tuin.</div></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Moules_frites.jpg/1280px-Moules_frites.jpg" alt="Mosselen" onerror="this.remove()"><div class="cb"><div class="ct">19:00</div><div class="ch">🍽️ Diner in Ciney</div><div class="cd">Het centrum in! Zoek een gezellige brasserie rondom Place Monseu en bestel mosselen of Belgisch stoofvlees met friet.</div><a class="nb" onclick="nav(50.2940,5.0990,'Restaurant+Place+Monseu+Ciney')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+</section>
+
+<!-- DAG 3 -->
+<section class="day" data-d="3" id="d3">
+  <div class="dh"><div class="dl">DAG 3</div><h2>Kastelen &amp; Grotten Hike</h2><div class="dd">Zaterdag 16 mei</div></div>
+  <div class="mw"><iframe loading="lazy" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Gendron-Celles+station,Belgium&destination=Gendron-Celles+station,Belgium&waypoints=Furfooz,Belgium|Chateau+de+Walzin,Belgium&mode=walking&zoom=12" allowfullscreen></iframe></div>
+
+  <div class="c"><div class="cb"><div class="ct">09:30</div><div class="ch">🎒 Voorbereiding</div><div class="cd">Ontbijt stevig. Smeer lunchpakketjes, vul flessen met water en gooi overwinningsbiertjes in de rugzak. Wandelschoenen aan!</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">10:30</div><div class="ch">🥾 Start — Station Gendron-Celles</div><div class="cd">Parkeer de auto bij het station. Hier begint het avontuur!</div><a class="nb" onclick="nav(50.2147,4.9706,'Station+Gendron-Celles')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Furfooz_04.JPG/1280px-Furfooz_04.JPG" alt="Furfooz" onerror="this.remove()"><div class="cb"><div class="ct">11:00</div><div class="ch">🏛️ Parc de Furfooz</div><div class="cd">Koop een ticket (ca. €5) en loop de route langs Romeinse ruïnes, rotswanden en verken de grotten.</div><a class="nb" onclick="nav(50.2167,4.9583,'Parc+de+Furfooz')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">13:00</div><div class="ch">🥪 Lunch langs de Lesse</div><div class="cd">Bij de Aiguilles de Chaleux rotsen. Perfecte plek voor boterhammen met uitzicht op de gigantische rotsformaties.</div><a class="nb" onclick="nav(50.2230,4.9690,'Aiguilles+de+Chaleux')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Walzin_Castle_-_panoramio.jpg/1280px-Walzin_Castle_-_panoramio.jpg" alt="Walzin" onerror="this.remove()"><div class="cb"><div class="ct">14:30</div><div class="ch">🏰 Kasteel van Walzin</div><div class="cd">HET hoogtepunt! Loop naar de voet van de klif waar het kasteel 50 meter boven jullie uittorent. Groepsfoto + biertje!</div><a class="nb" onclick="nav(50.2278,4.8944,'Chateau+de+Walzin')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">16:30</div><div class="ch">🌲 Terug bij de auto</div><div class="cd">Via beboste paden terug naar Gendron-Celles. 15–18 km in de benen!</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">17:00</div><div class="ch">🛁 Douchen &amp; Hottub</div><div class="cd">Douchen, badjas aan, hottub in. Jullie hebben het verdiend.</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">AVOND</div><div class="ch">🔥 Laatste avond</div><div class="cd">Restjes op de BBQ, spelletjes spelen en genieten van de laatste avond in het huisje.</div></div></div>
+</section>
+
+<!-- DAG 4 -->
+<section class="day" data-d="4" id="d4">
+  <div class="dh"><div class="dl">DAG 4</div><h2>Herstel, Friet &amp; Terugreis</h2><div class="dd">Zondag 17 mei</div></div>
+  <div class="mw"><iframe loading="lazy" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ciney,Belgium&destination=Helmond,Netherlands&mode=driving&zoom=8" allowfullscreen></iframe></div>
+
+  <div class="c"><div class="cb"><div class="ct">09:30</div><div class="ch">📦 Wakker worden &amp; Inpakken</div><div class="cd">Rustig aan doen. Alles opruimen, schoonmaken en spullen in de auto laden.</div></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">10:00</div><div class="ch">🔑 Uitchecken</div><div class="cd">Check-out vóór 10:00 (check even met Frederic of het iets later mag).</div></div></div>
+
+  <div class="c"><img class="ci" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flickr_-_cyclonebill_-_Fritter_med_mayonnaise.jpg/1280px-Flickr_-_cyclonebill_-_Fritter_med_mayonnaise.jpg" alt="Friet" onerror="this.remove()"><div class="cb"><div class="ct">11:30</div><div class="ch">🍟 Anti-kater Frituur!</div><div class="cd">Geen weekend in België compleet zonder een echte Friterie! Bestel een Bicky Burger, grote puntzak met andalousesaus en geniet nog even na.</div><a class="nb" onclick="nav(50.2940,5.0990,'Frituur+Ciney')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer</a></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">12:30</div><div class="ch">🚗 Rit naar huis</div><div class="cd">Tijd om terug te rijden. Nog even nagenieten van het weekend.</div><a class="nb" onclick="nav(50.2947,5.0961,'Ciney','Helmond,Netherlands')"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>Navigeer naar Helmond</a></div></div>
+
+  <div class="c"><div class="cb"><div class="ct">15:00</div><div class="ch">🏠 Aankomst Helmond</div><div class="cd">Iedereen moe maar voldaan weer thuis! 🍻</div></div></div>
+</section>
+
+<!-- PAKLIJST -->
+<section class="ps" id="dp">
+  <div class="dh"><div class="dl" style="background:rgba(34,197,94,.15);color:var(--green)">PAKLIJST</div><h2>Vergeet niet!</h2><div class="dd">Tik om af te vinken</div></div>
+  <div class="pg" id="pg"></div>
+</section>
+
+<script>
+function nav(lat,lng,q,dest){
+  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  let u;
+  if(dest){
+    u=iOS?`maps://?saddr=${q}&daddr=${dest}`
+      :`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(q)}&destination=${encodeURIComponent(dest)}&travelmode=driving`;
+  }else{
+    u=iOS?`maps://?q=${encodeURIComponent(q)}&ll=${lat},${lng}`
+      :`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  }
+  window.open(u,'_blank');
+}
+
+const secs=document.querySelectorAll('.day,.ps');
+const tabs=document.querySelectorAll('.tab');
+function sync(){
+  let c='1';
+  secs.forEach(s=>{if(s.getBoundingClientRect().top<160)c=s.dataset?.d||'p'});
+  const ps=document.getElementById('dp');
+  if(ps&&ps.getBoundingClientRect().top<160)c='p';
+  tabs.forEach(t=>t.classList.toggle('on',t.dataset.d===c));
+}
+window.addEventListener('scroll',sync,{passive:true});
+
+function go(d){
+  const el=document.getElementById('d'+d);
+  if(!el)return;
+  const off=document.getElementById('tabs').offsetHeight+4;
+  window.scrollTo({top:el.offsetTop-off,behavior:'smooth'});
+}
+
+const items=['🩳 Zwembroek & handdoek','🥾 Wandelschoenen','🪣 Waterdichte ton/zak',
+'☀️ Zonnebrand & zonnebril','🃏 Kaartspel / bordspel','🔊 Bluetooth speaker',
+'🔌 Opladers & powerbank','💶 Cash geld','🥖 Broodbeleg & ontbijt',
+'🔥 BBQ-spullen & houtskool','🧥 Badjas / joggingbroek','🎒 Rugzak voor de hike'];
+const g=document.getElementById('pg');
+let st;try{st=JSON.parse(localStorage.getItem('pack')||'{}')}catch(e){st={}}
+items.forEach((item,i)=>{
+  const d=document.createElement('div');
+  d.className='pi'+(st[i]?' ok':'');
+  d.innerHTML=`<div class="pb"></div><span>${item}</span>`;
+  d.onclick=()=>{d.classList.toggle('ok');st[i]=d.classList.contains('ok');
+    try{localStorage.setItem('pack',JSON.stringify(st))}catch(e){}};
+  g.appendChild(d);
+});
+
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)';obs.unobserve(x.target)}});
+},{threshold:0.08});
+document.querySelectorAll('.c').forEach(c=>{
+  c.style.opacity='0';c.style.transform='translateY(16px)';
+  c.style.transition='opacity .4s ease,transform .4s ease';obs.observe(c);
+});
+</script>
+</body>
+</html>
